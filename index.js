@@ -3,6 +3,11 @@ var express = require('express');
 var parser = require('fast-xml-parser');
 var app = express();
 var PORT = process.env.PORT || 3001;
+var corsOptions = {
+    origin: 'https://gillette-staging.mybigcommerce.com',
+    optionsSuccessStatus: 200 // For legacy browser support
+}
+app.use(cors(corsOptions));
 
 app.get("/", function(req, res) {
     const requestString = req.query.requestString;
