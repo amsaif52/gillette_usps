@@ -6,7 +6,6 @@ var PORT = process.env.PORT || 3001;
 
 app.get("/", function(req, res) {
     const requestString = req.query.requestString;
-    console.log(requestString);
     var options = {
       'method': 'GET',
       'url': `https://returns.usps.com/services/GetLabel?externalReturnLabelRequest=${requestString}`
@@ -21,9 +20,6 @@ app.get("/", function(req, res) {
         var data = [];
         data.push(Buffer.from(base64string, 'base64'));
         data = Buffer.concat(data);
-        console.log(data);
-        console.log('requested content length: ', response.headers['content-length']);
-        console.log('parsed content length: ', data.length);
         res.writeHead(200, {
             'Content-Type': 'application/pdf',
             'Content-Disposition': 'attachment; filename=usps-tracking.pdf',
