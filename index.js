@@ -1,6 +1,7 @@
 var request = require('request');
 var express = require('express');
 var parser = require('fast-xml-parser');
+var cors = require('cors');
 var app = express();
 var PORT = process.env.PORT || 3001;
 var corsOptions = {
