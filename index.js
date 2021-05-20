@@ -4,11 +4,7 @@ var parser = require('fast-xml-parser');
 var cors = require('cors');
 var app = express();
 var PORT = process.env.PORT || 3001;
-var corsOptions = {
-    origin: 'https://gillette-staging.mybigcommerce.com',
-    optionsSuccessStatus: 200 // For legacy browser support
-}
-app.use(cors(corsOptions));
+app.use(cors());
 
 app.get("/", function(req, res) {
     const requestString = req.query.requestString;
@@ -19,6 +15,7 @@ app.get("/", function(req, res) {
     request(options, function (error, response) {
         if (error) throw new Error(error);
         var xmlData = response.body;
+        console.log(xmlData);
         var jsonObj = null;
         if( parser.validate(xmlData) === true) { //optional (it'll return an object in case it's not valid)
             jsonObj = parser.parse(xmlData,options);
