@@ -19,9 +19,11 @@ app.get("/", function(req, res) {
     request(options, function (error, response) {
         if (error) throw new Error(error);
         var xmlData = response.body;
+        var jsonObj = null;
         if( parser.validate(xmlData) === true) { //optional (it'll return an object in case it's not valid)
-            var jsonObj = parser.parse(xmlData,options);
+            jsonObj = parser.parse(xmlData,options);
         }
+        console.log(jsonObj)
         var base64string = jsonObj.ExternalReturnLabelResponse.ReturnLabel;
         var data = [];
         data.push(Buffer.from(base64string, 'base64'));
